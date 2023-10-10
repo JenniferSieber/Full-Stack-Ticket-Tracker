@@ -1,7 +1,5 @@
 Full Stack Help Desk Ticket Tracker
 
-npm init
-
 Mongo DB - Mongoose
 
 dependencies:
@@ -19,4 +17,3 @@ dev-nodemon
 dotenv for protected files
 
 # Full-Stack-Ticket-Tracker
-#Thanks for inspo Mayanwolfe

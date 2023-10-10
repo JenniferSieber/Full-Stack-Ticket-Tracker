@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <title>Local Storage Ticket Tracker</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: #222">
+      <div class="container">
+        <h2>
+          <a class="navbar-brand" href="/">
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                class="bi bi-arrow-right-circle mr-2" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+              </svg>
+              <span style="font-size: 35px;">Acme</span>
+            </div>
+          </a>
+        </h2>
+      </div>
+    </nav>
+  </header>
+  <section class="container">
+    <section class="jumbotron">
+      <h1>Acme Ticket Tracker</h1>
+      <hr>
+      <h3>Add New Issue:</h3>
+      <form id="issueInputForm" method="POST" action="/new">
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" class="form-control" id="subject" name="subject" placeholder="Issue Subject...">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" name="description"
+            placeholder="Issue Description...">
+        </div>
+        <div class="form-group">
+          <label for="severity">Severity</label>
+          <select class="form-control" id="severity" name="severity">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High" selected>High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="assignedTo">Assigned To</label>
+          <input type="text" class="form-control" id="assignedTo" name="assignedTo"
+            placeholder="Enter Person Responsible...">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Ticket</button>
+      </form>
+    </section>
+
+    <section class="container">
+      <section class="row">
+        <div class="col-lg-12">
+          <div id="issuesList">
+            <% ticketList.forEach(tickets => { %>
+            <div class="well">
+              <div class="stats">
+                <p>
+                  <span class="label <%=tickets.status== 'Closed' ? 'label-success' : 'label-info'%>">
+                    <%=tickets.status%>
+                  </span>
+                </p>
+                <h6>Issue ID: <%=tickets._id%></h6>
+                <span class="glyphicon glyphicon-time"></span>
+                <%=tickets.severity%>
+                <span class="glyphicon glyphicon-user"></span>
+                <%=tickets.assignedTo%>
+              </div>
+              <div>
+                <h3><%=tickets.subject%></h3>
+                <p><%=tickets.description%></p>
+              </div>
+              <div class="btns">
+                <a href="/edit/<%=tickets._id%>" class="btn btn-warning">Close</a>
+                <a href="/edit/remove/<%=tickets._id%>" class="btn btn-danger">Delete</a>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </section>
+    </section>
+  </section>
+</body>
