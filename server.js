@@ -20,6 +20,3 @@ app.use("/edit", editRoutes);
 
 //Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
